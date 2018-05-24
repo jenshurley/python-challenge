@@ -1,10 +1,3 @@
-import pandas as pd
-import sys
-
-file = sys.argv[1]
-
-df = pd.read_csv(file)
-
 us_state_abbrev = {
     'Alabama': 'AL',
     'Alaska': 'AK',
@@ -57,21 +50,3 @@ us_state_abbrev = {
     'Wisconsin': 'WI',
     'Wyoming': 'WY',
 }
-
-df['state_abbr']= df['State'].map(us_state_abbrev)
-
-df['First_Name'], df['Last_Name'] = zip(*df['Name'].map(lambda x: x.split(' ')))
-
-df['SSN'] = df['SSN'].str.slice(start=7, stop=11, step=None).map(lambda x: "***-**-" + x)
-
-df['DOB'] = pd.to_datetime(df.DOB)
-df['DOB'] = df['DOB'].dt.strftime('%m/%d/%Y')
-
-df = df.drop(columns =['State','Name'])
-
-df = df[['Emp ID', 'First_Name', 'Last_Name', 'DOB', 'SSN', 'state_abbr']]
-
-print(df.head())
-
-#TODO export this data to DIFFERENT CSV
-df.to_csv('cleaned_employee_data.csv')
