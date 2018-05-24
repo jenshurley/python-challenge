@@ -74,4 +74,6 @@ df = df[['Emp ID', 'First_Name', 'Last_Name', 'DOB', 'SSN', 'state_abbr']]
 print(df.head())
 
 #TODO export this data to DIFFERENT CSV
-df.to_csv('cleaned_employee_data.csv')
+exported_file = sys.argv[2]
+
+df.to_csv(exported_file)
